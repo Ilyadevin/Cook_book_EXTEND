@@ -14,23 +14,26 @@ with open('Список рецептов.txt') as f:
         cook_book[food] = ingredient_list
 
 
-def dishes_lists(d, p):
-    for item, value in cook_book.items():
-        if item == d:
-            print(item)
-            for val in list(value):
-                count_0 = val.get('ingridient_name')
-                variable = val.get('quantity')
-                count_2 = val.get('measure')
-                print(count_0, int(variable) * p, count_2)
+def get_ingredient(name_dishes, int_count):
+    for dishes in name_dishes[0]:
+        for item, value in cook_book.items():
+            dish = dishes
+            if item == dish:
+                print('В блюдо - ', item, 'необоходимы следующие ингридиенты: ')
+                for val in list(value):
+                    val_key = val['quantity']
+                    int_val = int(val_key)
+                    print(val['ingridient_name'], int_val * int_count, val['measure'])
 
 
 def counting():
     while True:
+        dish_list = []
         dish = input("Введите блюдо  ")
+        dish_list.append(dish.split(", "))
         count = input('Введите количество блюд  ')
-        count_ints = int(count)
-        dishes_lists(dish, count_ints)
+        int_count = int(count)
+        get_ingredient(dish_list, int_count)
 
 
 counting()
