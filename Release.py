@@ -20,9 +20,7 @@ def get_ingredient(name_dishes, int_count):
             dish = dishes
             if item == dish:
                 for val in list(value):
-                    val_key = val['quantity']
-                    int_val = int(val_key)
-                    value_dict = {val['ingridient_name']: {'quantity': val['quantity'] * int_count, 'measure': val['measure']}} 
+                    value_dict = {val['ingridient_name']: {'quantity': int(val['quantity']) * int_count, 'measure': val['measure']}}
                     print(value_dict)
 
 
