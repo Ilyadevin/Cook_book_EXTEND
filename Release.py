@@ -19,11 +19,11 @@ def get_ingredient(name_dishes, int_count):
         for item, value in cook_book.items():
             dish = dishes
             if item == dish:
-                print('В блюдо - ', item, 'необоходимы следующие ингридиенты: ')
                 for val in list(value):
                     val_key = val['quantity']
                     int_val = int(val_key)
-                    print(val['ingridient_name'], int_val * int_count, val['measure'])
+                    value_dict = {val['ingridient_name']: {'quantity': val['quantity'] * int_count, 'measure': val['measure']}} 
+                    print(value_dict)
 
 
 def counting():
