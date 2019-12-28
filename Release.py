@@ -15,13 +15,25 @@ with open('Список рецептов.txt') as f:
 
 
 def get_ingredient(name_dishes, int_count):
-    for dishes in name_dishes[0]:
-        for item, value in cook_book.items():
-            dish = dishes
-            if item == dish:
-                for val in list(value):
-                    value_dict = {val['ingridient_name']: {'quantity': int(val['quantity']) * int_count, 'measure': val['measure']}}
-                    print(value_dict)
+    if name_dishes[0][0] == name_dishes[0][1]:
+        for dishes in name_dishes[0]:
+            for item, value in cook_book.items():
+                dish = dishes
+                if item == dish:
+                    for val in list(value):
+                            value_dict = {val['ingridient_name']: {'quantity': 2 * int(val['quantity']) * int_count,
+                                                                   'measure': val['measure']}}
+                            print(value_dict)
+                    return
+    else:
+        for dishes in name_dishes[0]:
+            for item, value in cook_book.items():
+                dish = dishes
+                if item == dish:
+                    for value_correct in list(value):
+                        value_dictionary = {value_correct['ingridient_name']: {'quantity': int(value_correct['quantity']) * int_count,
+                                'measure': value_correct['measure']}}
+                        print(value_dictionary)
 
 
 def counting():
