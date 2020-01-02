@@ -17,30 +17,19 @@ with open('Список рецептов.txt') as f:
 def get_ingredient(name_dishes, int_count):
     dishes_i = []
     s = []
+    value_dict = {}
     for dishes in sorted(name_dishes[0]):
         dishes_i.append(dishes)
         dishes_i.count(dishes)
         s.append(dishes_i.count(dishes))
-        print(s)
-        print(dishes_i)
-        if s[1:] >= 2:
-            for val in cook_book[dishes]:
-                value_dict = {val['ingredient_name']: {'quantity': 2 * int(val['quantity']) * int_count,
+        for val in cook_book[dishes]:
+            if dishes_i.count(dishes) == 1:
+                value_dict = {val['ingredient_name']: {'quantity': int(val['quantity']) * int_count,
                                                        'measure': val['measure']}}
-                print(value_dict)
-        elif s[2:] == 1:
-            for val in cook_book[dishes]:
-                value_dicti = {val['ingredient_name']: {'quantity': int(val['quantity']) * int_count,
-                                                        'measure': val['measure']}}
-                print(value_dicti)
-            # if dishes_i.count(dishes) > 2:
-            #     value_dict = {val['ingredient_name']: {'quantity': 2 * int(val['quantity']) * int_count,
-            #                                            'measure': val['measure']}}
-            #     print(value_dict)
-            # elif dishes_i.count(dishes) == 1:
-            #     value_dicti = {val['ingredient_name']: {'quantity': int(val['quantity']) * int_count,
-            #                                             'measure': val['measure']}}
-            #     print(value_dicti)
+            elif dishes_i.count(dishes) >= 2:
+                value_dict.update({val['ingredient_name']: {'quantity': 2 * int(val['quantity']) * int_count,
+                                                            'measure': val['measure']}})
+            print(value_dict)
 
 
 def counting():
