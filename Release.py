@@ -14,22 +14,29 @@ with open('Список рецептов.txt') as f:
         cook_book[food] = ingredient_list
 
 
-def get_ingredient(name_dishes, int_count):
-    dishes_i = []
-    s = []
-    value_dict = {}
+def get_ingredient(name_dishes, int_count, ):
+    q = []
     for dishes in sorted(name_dishes[0]):
-        dishes_i.append(dishes)
-        dishes_i.count(dishes)
-        s.append(dishes_i.count(dishes))
         for val in cook_book[dishes]:
-            if dishes_i.count(dishes) == 1:
-                value_dict = {val['ingredient_name']: {'quantity': int(val['quantity']) * int_count,
-                                                       'measure': val['measure']}}
-            elif dishes_i.count(dishes) >= 2:
-                value_dict.update({val['ingredient_name']: {'quantity': 2 * int(val['quantity']) * int_count,
-                                                            'measure': val['measure']}})
-            print(value_dict)
+
+            ingredients = {'quantity': int(val['quantity']) * int_count,
+                           'measure': val['measure']}
+            value_dict = {val['ingredient_name']: ingredients}
+
+            for key, value in value_dict.items():
+                if key in q:
+                    ingredients['quantity'] += int(val['quantity'])
+                    value_dict = {val['ingredient_name']: ingredients}
+                    if key in value_dict:
+                        del key, value
+                        ingredients['quantity'] += int(val['quantity'])
+                        value_dict = {val['ingredient_name']: ingredients}
+                        print(value_dict)
+                    else:
+                        print(value_dict)
+                else:
+                    q.append(key)
+                    print(value_dict)
 
 
 def counting():
